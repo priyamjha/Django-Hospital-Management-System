@@ -1,0 +1,51 @@
+{% extends 'user_base.html' %}
+{% load socialaccount %}
+{% block content %}
+
+<h1 class="display-5 fw-bold lh-1 mb-3">Register</h1>
+<form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+    {% csrf_token %}
+
+    <div class="form-floating mb-3">
+        <input type="text" name="username" class="form-control" id="id_username" required />
+        <label for="id_username">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" name="full_name" class="form-control" id="id_full_name" required />
+        <label for="id_full_name">Full Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="email" name="email" class="form-control" id="id_email" required />
+        <label for="id_email">Email address</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" name="password1" class="form-control" id="id_password1" required />
+        <label for="id_password1">Enter Password</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" name="password2" class="form-control" id="id_password2" required />
+        <label for="id_password2">Confirm Password</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <select name="user_type" class="form-select" id="id_user_type" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+        </select>
+        <label for="id_user_type">User Type</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+    <hr class="my-4">
+    <small class="text-muted">Already have an account? <a href="{% url 'login' %}">Sign In</a></small><br>
+
+    <br>
+    <a href="{% provider_login_url 'google' %}?process=login/" class="btn btn-primary">
+        Login with Google
+    </a>
+
+</form>
+
+
+{% endblock content %}

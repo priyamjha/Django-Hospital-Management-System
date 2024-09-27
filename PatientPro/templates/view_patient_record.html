@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5 fw-bold lh-1 mb-4 text-primary">Your Medical Records</h1>
+
+    <div class="card mx-auto" style="max-width: 800px;">
+        <div class="card-body">
+            <h4 class="card-title mb-3 text-primary">{{ patient.full_name|title }}</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>ID:</strong> {{ patient.id }}</li>
+                <!-- <li class="list-group-item"><strong>Full Name:</strong> {{ patient.full_name }}</li> -->
+                <li class="list-group-item"><strong>Email:</strong> {{ patient.email }}</li>
+                <li class="list-group-item"><strong>Phone Number:</strong> {{ patient.phone_number }}</li>
+                <li class="list-group-item"><strong>Address:</strong> {{ patient.address }}</li>
+            </ul>
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'patient_dashboard' %}" class="btn btn-outline-primary btn-sm me-2">Back to List</a>
+                <a href="{% url 'update_patient' request.user.pk %}" class="btn btn-outline-primary btn-sm">Update Details</a>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4">
+
+    
+    
+    {% if patient_records %}
+    <div class="container mt-4">
+        <h2 class="display-6 fw-bold mb-4 text-primary">Medical Records</h2>
+        <div class="list-group">
+            {% for record in patient_records %}
+            <div class="list-group-item list-group-item-action mb-3 shadow-sm rounded-3">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0 text-secondary">Record ID: {{ record.record_id }}</h5>
+                    <span class="badge bg-info text-dark">{{ record.created_date }}</span>
+                </div>
+                <dt class="col-sm-4">Diagnostics:</dt>
+                <dd class="col-sm-8">{{ record.diagnostics|capfirst }}</dd>
+                
+                <dt class="col-sm-4">Observations:</dt>
+                <dd class="col-sm-8">{{ record.observations|capfirst }}</dd>
+                
+                <dt class="col-sm-4">Treatments:</dt>
+                <dd class="col-sm-8">{{ record.treatments|capfirst }}</dd>
+                
+                <dt class="col-sm-4">Department Name:</dt>
+                <dd class="col-sm-8">{{ record.department.name|capfirst }}</dd>
+                
+                <dt class="col-sm-4">Doctor:</dt>
+                <dd class="col-sm-8">
+                    {% if record.doctor %}
+                        {{ record.doctor.full_name|title }}
+                    {% else %}
+                        None
+                    {% endif %}
+                </dd>
+                
+                <dt class="col-sm-4">Misc:</dt>
+                <dd class="col-sm-8">{{ record.misc|capfirst }}</dd>
+      
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="container mt-4">
+        <p class="text-center fs-4 text-muted">You have no medical records.</p>
+    </div>
+    {% endif %}
+
+
+</div>
+
+<style>
+    .card {
+        border-radius: 0.375rem;
+    }
+
+    .card-title {
+        color: #6f42c1; /* Light purple color */
+    }
+
+    .btn-outline-primary {
+        border-color: #6f42c1;
+        color: #6f42c1;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #6f42c1;
+        color: #fff;
+    }
+
+    .text-primary {
+        color: #6f42c1 !important; /* Light purple color for text */
+    }
+</style>
+
+{% endblock %}

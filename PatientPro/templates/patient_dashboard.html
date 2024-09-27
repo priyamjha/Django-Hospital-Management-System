@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+<h1 class="display-5 fw-bold lh-1 mb-3">Patient Dashboard</h1>
+<p class="col-md-8 fs-4">Welcome, {{ user.full_name|title }}!</p>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#">Patient Dashboard</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'view_patient_record' %}">Patient Record</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'department_list' %}">Departments</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'update_patient' request.user.pk %}">Update
+                        Profile</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero bg-light text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome, {{ user.full_name|title }}</h1>
+        <p class="lead">Your personal dashboard to manage your health and appointments.</p>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Appointments Section -->
+        <!-- <div id="appointments" class="col-md-6 mb-4">
+            <h2 class="section-heading">Upcoming Appointments</h2>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">Appointment with Dr. Smith</h5>
+                    <p class="mb-1">Date: August 25, 2024</p>
+                    <small>Location: Room 101</small>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">Follow-up Check-up</h5>
+                    <p class="mb-1">Date: September 5, 2024</p>
+                    <small>Location: Room 102</small>
+                </a>
+            </div>
+        </div> -->
+        <!-- Medical Records Section -->
+        <!-- <div id="records" class="col-md-6 mb-4">
+            <h2 class="section-heading">Medical Records</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h5 class="mb-1">Record ID: 12345</h5>
+                    <p class="mb-1">Date: August 20, 2024</p>
+                    <small>Diagnosis: Flu</small>
+                </li>
+                <li class="list-group-item">
+                    <h5 class="mb-1">Record ID: 67890</h5>
+                    <p class="mb-1">Date: July 15, 2024</p>
+                    <small>Diagnosis: Routine Check-up</small>
+                </li>
+            </ul>
+        </div> -->
+    </div>
+    <!-- Profile Section -->
+    <div id="profile" class="col-md-12 mb-4 p-4 border rounded shadow-sm bg-light">
+        <h2 class="section-heading mb-4 text-primary">Profile</h2>
+        <div class="list-group">
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Username:</strong>
+                <span class="ms-2">{{ user.username}}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Name:</strong>
+                <span class="ms-2">{{ user.full_name|title }}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Email:</strong>
+                <span class="ms-2">{{ user.email }}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Phone:</strong>
+                <span class="ms-2">{{ user.phone_number }}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Address:</strong>
+                <span class="ms-2">{{ user.address|capfirst }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Medical Records Table -->
+<h2 class="section-heading mb-4">Medical Records</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-hover shadow-sm">
+        <thead class="bg-light text-dark">
+            <tr>
+                <th scope="col">Record ID</th>
+                <th scope="col">Created Date</th>
+                <th scope="col">Diagnostics</th>
+                <th scope="col">Observations</th>
+                <th scope="col">Treatments</th>
+                <th scope="col">Department</th>
+                <th scope="col">Misc</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.record_id }}</td>
+                <td>{{ record.created_date }}</td>
+                <td>{{ record.diagnostics|capfirst }}</td>
+                <td>{{ record.observations|capfirst }}</td>
+                <td>{{ record.treatments|capfirst }}</td>
+                <td>{{ record.department.name|title }}</td>
+                <td>{{ record.misc|capfirst }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .section-heading {
+        font-size: 1.75rem;
+        font-weight: 600;
+    }
+
+    .list-group-item {
+        border: 1px solid #dee2e6;
+    }
+
+    .list-group-item:first-child {
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    .list-group-item:last-child {
+        border-bottom-left-radius: 0.25rem;
+        border-bottom-right-radius: 0.25rem;
+    }
+
+    .bg-light {
+        background-color: #f8f9fa !important;
+    }
+
+    .text-primary {
+        color: #6f42c1 !important; /* Bootstrap primary color */
+    }
+</style>
+
+{% endblock %}

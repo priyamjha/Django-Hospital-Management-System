@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="display-5 fw-bold lh-1 mb-3">Doctor Dashboard</h1>
+<p class="col-md-8 fs-4">Welcome, Dr. {{ user.full_name|title }}!</p>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#">Doctor Dashboard</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'doctor_dashboard' %}">Home</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'my_patients' %}">My Patients</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'doctor_list' %}">Doctors</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'patient_list' %}">Patients</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'patient-records' %}">Patient Records</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'department_list' %}">Departments</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'update_doctor' request.user.id %}">Update
+                        Profile</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero bg-light text-center py-5">
+    <div class="container">
+        <h1 class="display-4">Welcome, Dr. {{ user.full_name|title }}</h1>
+        <p class="lead">Your personal dashboard to manage your appointments and patients.</p>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Appointments Section -->
+        <!-- <div id="appointments" class="col-md-6 mb-4">
+            <h2 class="section-heading">Upcoming Appointments</h2>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">Appointment with [Patient Name]</h5>
+                    <p class="mb-1">Date: August 25, 2024</p>
+                    <small>Patient ID: 12345</small>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <h5 class="mb-1">Follow-up with [Patient Name]</h5>
+                    <p class="mb-1">Date: September 5, 2024</p>
+                    <small>Patient ID: 67890</small>
+                </a>
+            </div>
+        </div> -->
+        <!-- Patients Section -->
+        <!-- <div id="patients" class="col-md-6 mb-4">
+            <h2 class="section-heading">Patients</h2>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <h5 class="mb-1">Patient ID: 12345</h5>
+                    <p class="mb-1">Name: [Patient Name]</p>
+                    <small>Email: [Patient Email]</small>
+                </li>
+                <li class="list-group-item">
+                    <h5 class="mb-1">Patient ID: 67890</h5>
+                    <p class="mb-1">Name: [Patient Name]</p>
+                    <small>Email: [Patient Email]</small>
+                </li>
+            </ul>
+        </div> -->
+    </div>
+    <!-- Profile Section -->
+    <div id="profile" class="mb-4 p-4 border rounded shadow-sm bg-light">
+        <h2 class="section-heading mb-4 text-primary">Profile</h2>
+        <div class="list-group">
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Username:</strong>
+                <span class="ms-2">{{ user.username}}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Name:</strong>
+                <span class="ms-2">{{ user.full_name|title }}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Email:</strong>
+                <span class="ms-2">{{ user.email }}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Phone:</strong>
+                <span class="ms-2">{{ user.phone_number }}</span>
+            </div>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>Department:</strong>
+                <span class="ms-2">{{ user.department }}</span>
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        .section-heading {
+            font-size: 1.75rem;
+            font-weight: 600;
+        }
+    
+        .list-group-item {
+            border: 1px solid #dee2e6;
+        }
+    
+        .list-group-item:first-child {
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+        }
+    
+        .list-group-item:last-child {
+            border-bottom-left-radius: 0.25rem;
+            border-bottom-right-radius: 0.25rem;
+        }
+    
+        .bg-light {
+            background-color: #f8f9fa !important;
+        }
+    
+        .text-primary {
+            color: #6f42c1 !important; /* Bootstrap primary color */
+        }
+    </style>
+    
+</div>
+
+{% endblock %}

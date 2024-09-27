@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="#">PatientPro</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<header class="hero bg-dark text-white text-center py-5" style="background: url('hero-image.jpg') center/cover no-repeat;">
+    <div class="container animate__animated animate__fadeInDown">
+        <h1 class="display-4 fw-bold mb-3">Welcome to Our Hospital</h1>
+        <p class="lead mb-4">Providing quality healthcare for everyone</p>
+        <a href="#contact" class="btn btn-light btn-lg animate__animated animate__pulse animate__infinite">Contact Us</a>
+    </div>
+</header>
+
+<!-- Services Section -->
+<section id="services" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-heading text-center mb-5">Our Services</h2>
+        <div class="row text-center g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card shadow-sm h-100 animate__animated animate__fadeInUp">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Emergency Care</h5>
+                        <p class="card-text">Immediate and emergency medical care for urgent cases.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card shadow-sm h-100 animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">General Check-ups</h5>
+                        <p class="card-text">Routine medical check-ups to ensure your health is in good shape.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card shadow-sm h-100 animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Specialist Consultations</h5>
+                        <p class="card-text">Consultations with specialists for more specific medical needs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="bg-light py-5">
+    <div class="container">
+        <h2 class="section-heading text-center mb-4">Contact Us</h2>
+        <form class="animate__animated animate__fadeIn">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                </div>
+                <div class="col-12 mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Your Message"></textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-lg w-100 animate__animated animate__fadeInUp">Send Message</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- Adding CSS and Animation Classes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+<style>
+    .hero {
+        background: rgba(0, 0, 0, 0.6); /* Dark overlay on background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 50vh;
+    }
+    .card-title {
+        font-weight: bold;
+    }
+    .card:hover {
+        transform: translateY(-10px);
+        transition: all 0.01s ease;
+    }
+</style>
+
+{% endblock %}

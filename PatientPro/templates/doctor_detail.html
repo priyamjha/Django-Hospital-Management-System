@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h1 class="display-5 fw-bold lh-1 mb-4 text-primary">Doctor Details</h1>
+
+    <div class="card mx-auto" style="max-width: 800px;">
+        <div class="card-body">
+            <h4 class="card-title mb-3 text-primary">Dr. {{ doctor.full_name|title }}</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>ID:</strong> {{ doctor.id }}</li>
+                <li class="list-group-item"><strong>Role:</strong> {{ doctor.get_user_type_display }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ doctor.email }}</li>
+                <li class="list-group-item"><strong>Phone Number:</strong> {{ doctor.phone_number }}</li>
+                <li class="list-group-item"><strong>Address:</strong> {{ doctor.address|capfirst }}</li>
+                <li class="list-group-item"><strong>Professional License Number:</strong> {{ doctor.professional_license_number|title }}</li>
+                <li class="list-group-item"><strong>Years of Experience:</strong> {{ doctor.years_of_experience }}</li>
+            </ul>
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'doctor_list' %}" class="btn btn-outline-primary btn-sm me-2">Back to List</a>
+                {% if is_own_profile %}
+                <a href="{% url 'update_doctor' doctor.id %}" class="btn btn-outline-primary btn-sm">Update Profile</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <style>
+        .btn-outline-primary {
+            border-color: #6f42c1;
+            color: #6f42c1;
+        }
+    
+        .btn-outline-primary:hover {
+            background-color: #6f42c1;
+            color: #fff;
+        }
+        .text-primary {
+            color: #6f42c1 !important; /* Bootstrap primary color */
+        }
+    </style>
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="display-5 fw-bold lh-1 mb-4 text-primary">Departments List</h1>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped shadow-sm rounded">
+            <thead style="background-color: #e6e0f8; color: #5e3b76;">
+                <tr class="text-center">
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Specialization</th>
+                    {% if user.user_type == 'doctor' %}
+                    <th scope="col">Action</th>
+                    {% else %}
+                    <th scope="col">Doctors</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                <tr class="text-center align-middle">
+                    <td>{{ department.id }}</td>
+                    <td>{{ department.name }}</td>
+                    <td>{{ department.location }}</td>
+                    <td>{{ department.specialization }}</td>
+                    {% if user.user_type == 'doctor' %}
+                    <td>
+                        <a href="{% url 'department_doctors_list' department.id %}" class="btn btn-outline-primary btn-sm me-2">View Doctors</a> 
+                        <a href="{% url 'department_patients_list' department.id %}" class="btn btn-outline-primary btn-sm">View Patients</a>
+                    </td>
+                    {% else %}
+                    <td>
+                        <a href="{% url 'department_doctors_list' department.id %}" class="btn btn-outline-primary btn-sm">View Doctors</a>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">No departments available.</td> <!-- Adjust colspan if necessary -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table-hover tbody tr:hover {
+        background-color: #f5f5f5; /* Light gray hover effect */
+    }
+
+    .btn-outline-primary {
+        border-color: #6f42c1;
+        color: #6f42c1;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #6f42c1;
+        color: #fff;
+    }
+
+    .text-primary {
+        color: #6f42c1 !important; /* Light purple color for text */
+    }
+
+    .shadow-sm {
+        box-shadow: 0 0.5rem 1rem rgba(111, 66, 193, 0.15); /* Light purple shadow */
+    }
+
+    .rounded {
+        border-radius: 0.375rem;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="display-5 fw-bold lh-1 mb-4 text-primary">Update Patient Records</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header text-primary d-flex justify-content-center">
+            <h5 class="card-title mb-0">Patient Records Information</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-floating mb-3">
+                    <select name="doctor" class="form-select form-control-lg" id="id_doctor" required>
+                        <option value="" disabled selected>Select a Doctor</option>
+                        {% for doctor in form.doctor.field.queryset %}
+                            <option value="{{ doctor.id }}" {% if doctor.id == form.doctor.value %}selected{% endif %}>
+                                {{ doctor.full_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <label for="id_doctor">Assign Doctor</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <select name="department" class="form-select form-control-lg" id="id_department" required>
+                        <option value="" disabled selected>Select Department</option>
+                        {% for department in form.department.field.queryset %}
+                            <option value="{{ department.id }}" {% if department.id == form.department.value %}selected{% endif %}>{{ department.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="id_department">Department</label>
+                </div>
+
+                <div class="mb-3">
+                    <label for="id_diagnostics">Diagnostics</label>
+                    <textarea name="diagnostics" class="form-control form-control-lg" id="id_diagnostics" rows="3" required>{{ form.diagnostics.value }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="id_observations">Observations</label>
+                    <textarea name="observations" class="form-control form-control-lg" id="id_observations" rows="3">{{ form.observations.value }}</textarea>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="id_treatments">Treatments</label>
+                    <textarea name="treatments" class="form-control form-control-lg" id="id_treatments" rows="3">{{ form.treatments.value }}</textarea>
+                </div>
+                
+                
+                
+                <div class="mb-3">
+                    <label for="id_misc">Miscellaneous</label>
+                    <textarea name="misc" class="form-control form-control-lg" id="id_misc" rows="3">{{ form.misc.value }}</textarea>
+                </div>
+                
+                
+                
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'get_patient_detail' patient.id %}" class="btn btn-outline-primary me-2">Back to Details</a>
+                    <button type="submit" class="btn btn-outline-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-outline-primary {
+        border-color: #6f42c1;
+        color: #6f42c1;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #6f42c1;
+        color: #fff;
+    }
+
+    .text-primary {
+        color: #6f42c1 !important;
+    }
+</style>
+
+{% endblock %}

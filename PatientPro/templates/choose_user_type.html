@@ -1,0 +1,21 @@
+{% extends 'user_base.html' %}
+
+{% block content %}
+<h2 class="display-5 fw-bold lh-1 mb-3">Choose Your User Type</h2>
+<form class="p-4 p-md-5 border rounded-3 bg-light" method="post">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input type="text" name="full_name" class="form-control" id="id_full_name" required />
+        <label for="id_full_name">Full Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <select name="user_type" class="form-select" id="id_user_type" required>
+            <option value="" disabled selected>Select your role</option>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+        </select>
+        <label for="id_user_type">User Type</label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Save</button>
+</form>
+{% endblock %}

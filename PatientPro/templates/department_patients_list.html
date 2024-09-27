@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-4">
+    <h1 class="display-5 fw-bold lh-1 mb-4 text-primary">Patients in {{ department.name }} Department</h1>
+
+    <a href="{% url 'department_list' %}" class="btn btn-outline-secondary mb-3">← Back to Departments</a>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-striped shadow-sm rounded">
+            <thead style="background-color: #e6e0f8; color: #5e3b76;">
+                <tr class="text-center">
+                    <th scope="col">ID</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr class="text-center align-middle" style="transition: background-color 0.3s;">
+                    <td>{{ patient.id }}</td>
+                    <td class="fw-semibold">{{ patient.full_name|title }}</td>
+                    <td>{{ patient.email }}</td>
+                    <td>
+                        {% if patient.id in assigned_patients %}
+                        <a href="{% url 'get_patient_records' patient.id %}" class="btn btn-outline-primary btn-sm me-2">
+                            <i class="bi bi-pencil-square"></i> View Patient Details
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No Patients available for this department.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .btn-outline-secondary {
+        border-color: #b19cd9;
+        color: #5e3b76;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #b19cd9;
+        color: #fff;
+    }
+
+    .btn-outline-primary {
+        border-color: #6f42c1;
+        color: #6f42c1;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #6f42c1;
+        color: #fff;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f2e5ff;
+    }
+    
+    .text-primary {
+        color: #6f42c1 !important; /* Light purple color for text */
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: #f9f6ff;
+    }
+
+    .fw-bold {
+        color: #5e3b76;
+    }
+
+    .shadow-sm {
+        box-shadow: 0 0.5rem 1rem rgba(94, 59, 118, 0.15);
+    }
+</style>
+{% endblock %}

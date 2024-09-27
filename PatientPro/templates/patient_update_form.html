@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="display-5 fw-bold lh-1 mb-4 text-primary">Update Patient Details</h1>
+
+    <div class="card shadow-sm">
+        <div class="card-header text-primary d-flex justify-content-center">
+            <h5 class="card-title mb-0">Patient Information</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="form-floating mb-3">
+                    <input type="text" name="full_name" class="form-control form-control-lg" id="id_full_name" value="{{ form.full_name.value }}" required>
+                    <label for="id_full_name">Full Name</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="email" name="email" class="form-control form-control-lg" id="id_email" value="{{ form.email.value }}" required>
+                    <label for="id_email">Email</label>
+                </div>
+                
+                <div class="form-floating mb-3">
+                    <input type="text" name="phone_number" class="form-control form-control-lg" id="id_phone_number" value="{{ form.phone_number.value }}">
+                    <label for="id_phone_number">Phone Number</label>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="id_address">Address</label>
+                    <textarea name="address" class="form-control form-control-lg" id="id_address" rows="4">{{ form.address.value }}</textarea>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'view_patient_record' %}" class="btn btn-outline-primary me-2">Back to Patient Record</a>
+                    <button type="submit" class="btn btn-outline-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .btn-outline-primary {
+        border-color: #6f42c1;
+        color: #6f42c1;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #6f42c1;
+        color: #fff;
+    }
+
+    .text-primary {
+        color: #6f42c1 !important; /* Light purple color for text */
+    }
+</style>
+
+
+{% endblock %}
